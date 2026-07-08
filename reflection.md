@@ -26,13 +26,18 @@ At first, I thought about making separate classes for different tasks like walki
 **a. Constraints and priorities**
 
 - What constraints does your scheduler consider (for example: time, priority, preferences)?
+My scheduler considers the time of each task, the pet the task belongs to, the task's completion status, and whether tasks have the same scheduled time. It can sort tasks by time, filter tasks by pet name or completion status, and detect simple conflicts when two tasks are scheduled at the same exact time.
+
 - How did you decide which constraints mattered most?
+The most important constraint was time because a daily schedule needs to be in the correct order. After that, filtering by pet and completion status was useful because it helps the owner focus on specific tasks.
+
 
 **b. Tradeoffs**
 
 - Describe one tradeoff your scheduler makes.
+One tradeoff my scheduler makes is that the conflict detection only checks for exact matching times. For example, it can detect if two tasks both start at 9:00 AM, but it does not check if one task overlaps another based on duration.
 - Why is that tradeoff reasonable for this scenario?
-
+This is reasonable for this project because it keeps the code simple and easier to understand. A full calendar-style conflict checker would be more realistic, but it would also make the project more complicated.
 ---
 
 ## 3. AI Collaboration

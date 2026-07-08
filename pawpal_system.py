@@ -1,6 +1,5 @@
-from asyncio import tasks
 from dataclasses import dataclass, field
-
+from datetime import date, timedelta
 
 @dataclass
 class Task:
@@ -10,14 +9,35 @@ class Task:
     priority: str
     frequency: str = "daily"
     completed: bool = False
+    due_date: date = field(default_factory=date.today)
 
     def mark_complete(self):
         """Mark the task as completed."""
         self.completed = True
+        return self.create_next_occurrence()
 
     def mark_incomplete(self):
         """Mark the task as incomplete."""
         self.completed = False
+
+    def create_next_occurrence(self):
+        """Create the next daily or weekly version of a task."""
+        if self.frequency.lower() == "daily":
+            next_date = self.due_date + timedelta(days=1)
+        elif self.frequency.lower() == "weekly":
+            next_date = self.due_date + timedelta(days=7)
+        else:
+            return None
+
+        return Task(
+            self.description,
+            self.time,
+            self.duration,
+            self.priority,
+            self.frequency,
+            False,
+            next_date
+        )
 
 @dataclass
 class Pet:
@@ -84,6 +104,36 @@ class Scheduler:
         tasks = self.sort_by_time()
         return [item for item in tasks if item[1].completed == completed]
 
+    def detect_conflicts(self):
+        """Find tasks that are scheduled at the same time."""
+        tasks = self.sort_by_time()
+        conflicts = []
+
+        seen_times = {}
+
+        for pet_name, task in tasks:
+            if task.time in seen_times:
+                conflicts.append((seen_times[task.time], (pet_name, task)))
+            else:
+                seen_times[task.time] = (pet_name, task)
+
+        return conflicts
+
+    def mark_task_complete(self, pet_name, task_description):
+        """Mark a task complete and add the next recurring task if needed."""
+        for pet in self.owner.pets:
+            if pet.name.lower() == pet_name.lower():
+                for task in pet.tasks:
+                    if task.description.lower() == task_description.lower():
+                        next_task = task.mark_complete()
+
+                        if next_task:
+                            pet.add_task(next_task)
+
+                        return True
+
+        return False
+
     def generate_schedule(self):
         """Generate the schedule sorted by time."""
         return self.sort_by_time()
@@ -101,5 +151,6 @@ class Scheduler:
             print(f"  Duration: {task.duration} minutes")
             print(f"  Priority: {task.priority}")
             print(f"  Frequency: {task.frequency}")
+            print(f"  Due date: {task.due_date}")
             print(f"  Status: {status}")
             print()
