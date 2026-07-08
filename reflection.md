@@ -44,13 +44,15 @@ This is reasonable for this project because it keeps the code simple and easier 
 
 **a. How you used AI**
 
-- How did you use AI tools during this project (for example: design brainstorming, debugging, refactoring)?
-- What kinds of prompts or questions were most helpful?
+I used AI to help brainstorm the class design, write the first version of the UML, create class skeletons, debug errors, and improve the scheduling logic. AI was also helpful when I needed short examples for tests and README documentation.
+
+The most helpful prompts were specific questions, such as asking how the Scheduler should sort tasks by time, how to detect conflicts, or why an indentation error was happening. These prompts worked better than asking AI to do the whole project at once.
 
 **b. Judgment and verification**
 
-- Describe one moment where you did not accept an AI suggestion as-is.
-- How did you evaluate or verify what the AI suggested?
+One moment where I did not accept the AI suggestion as-is was when the code did not match my actual files. I had to upload my real `app.py` and `pawpal_system.py` so the answer could be adjusted to my project.
+
+I verified the suggestions by running `python main.py`, running `python -m pytest`, and checking whether the Streamlit app worked in the browser.
 
 ---
 
@@ -58,17 +60,15 @@ This is reasonable for this project because it keeps the code simple and easier 
 
 **a. What you tested**
 
-- What behaviors did you test?
-I tested the main behaviors of my PawPal+ system. I tested that a task can be marked complete, that adding a task to a pet increases the pet's task count, that the scheduler sorts tasks by time, that a daily recurring task creates the next task, and that the scheduler detects conflicts when two tasks have the same time.
-- Why were these tests important?
-These tests were important because they check the main parts of the scheduling logic. They help make sure the system works before connecting it more deeply to the Streamlit app.
+I tested that a task can be marked complete, that adding a task to a pet increases the pet's task count, that the scheduler sorts tasks by time, that recurring daily tasks create the next task, and that conflicts are detected when two tasks have the same time.
+
+These tests were important because they checked the main behaviors of the project. They helped confirm that the classes and scheduler logic worked before relying on the Streamlit app.
 
 **b. Confidence**
 
-- How confident are you that your scheduler works correctly?
-I am about 4 out of 5 confident that my scheduler works correctly for the main project requirements. The tests passed for the basic expected cases.
-- What edge cases would you test next if you had more time?
-If I had more time, I would test more edge cases, such as invalid time formats, pets with no tasks, weekly recurring tasks, and tasks that overlap by duration instead of starting at the exact same time.
+I am about 4 out of 5 confident that my scheduler works correctly for the main requirements. The basic tests passed and the demo script showed the schedule working.
+
+If I had more time, I would test invalid time formats, pets with no tasks, weekly recurring tasks, and overlapping tasks that start at different times but still conflict because of duration.
 
 ---
 
@@ -76,12 +76,12 @@ If I had more time, I would test more edge cases, such as invalid time formats, 
 
 **a. What went well**
 
-- What part of this project are you most satisfied with?
+The part I am most satisfied with is connecting the backend classes to the schedule logic. The Owner, Pet, Task, and Scheduler classes work together, and the app can show a real schedule instead of just placeholder UI.
 
 **b. What you would improve**
 
-- If you had another iteration, what would you improve or redesign?
+If I had another iteration, I would improve the conflict detection. Right now, it only checks if two tasks start at the exact same time. A better version would also check whether tasks overlap based on duration.
 
 **c. Key takeaway**
 
-- What is one important thing you learned about designing systems or working with AI on this project?
+One important thing I learned is that system design makes coding easier. Starting with classes and responsibilities helped me understand how the app should be organized before writing all the logic.
