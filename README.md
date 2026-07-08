@@ -79,19 +79,10 @@ Today's Schedule
 
 ## 🧪 Testing PawPal+
 
+To run the tests:
+
 ```bash
-# Run the full test suite:
-pytest
-
-# Run with coverage:
-pytest --cov
-```
-
-Sample test output:
-
-```
-# Paste your pytest output here
-```
+python -m pytest
 
 ## 📐 Smarter Scheduling
 

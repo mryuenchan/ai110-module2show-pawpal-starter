@@ -59,12 +59,16 @@ This is reasonable for this project because it keeps the code simple and easier 
 **a. What you tested**
 
 - What behaviors did you test?
+I tested the main behaviors of my PawPal+ system. I tested that a task can be marked complete, that adding a task to a pet increases the pet's task count, that the scheduler sorts tasks by time, that a daily recurring task creates the next task, and that the scheduler detects conflicts when two tasks have the same time.
 - Why were these tests important?
+These tests were important because they check the main parts of the scheduling logic. They help make sure the system works before connecting it more deeply to the Streamlit app.
 
 **b. Confidence**
 
 - How confident are you that your scheduler works correctly?
+I am about 4 out of 5 confident that my scheduler works correctly for the main project requirements. The tests passed for the basic expected cases.
 - What edge cases would you test next if you had more time?
+If I had more time, I would test more edge cases, such as invalid time formats, pets with no tasks, weekly recurring tasks, and tasks that overlap by duration instead of starting at the exact same time.
 
 ---
 
