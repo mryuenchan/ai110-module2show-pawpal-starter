@@ -5,13 +5,20 @@
 **a. Initial design**
 
 - Briefly describe your initial UML design.
+My initial UML design included the main parts needed for the PawPal+ app. I wanted the app to let a pet owner add their pet, create care tasks, and generate a simple daily care plan.
 - What classes did you include, and what responsibilities did you assign to each?
+- Owner: stores owner information.
+- Pet: stores pet information.
+- CareTask: stores each task’s name, duration, and priority.
+- Scheduler: chooses and organizes the tasks.
+- DailyPlan: stores the final schedule for the day
 
 **b. Design changes**
 
 - Did your design change during implementation?
+Yes, my design changed a little during implementation.  information.
 - If yes, describe at least one change and why you made it.
-
+At first, I thought about making separate classes for different tasks like walking, feeding, and medicine. I changed it to one general CareTask class because the tasks all used similar.
 ---
 
 ## 2. Scheduling Logic and Tradeoffs
