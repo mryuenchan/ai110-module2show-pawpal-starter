@@ -5,7 +5,7 @@
 **a. Initial design**
 
 - Briefly describe your initial UML design.
-My initial UML design included the main parts needed for the PawPal+ app. I wanted the app to let a pet owner add their pet, create care tasks, and generate a simple daily care plan.
+My initial UML design used four main classes: Owner, Pet, Task, and Scheduler.
 - What classes did you include, and what responsibilities did you assign to each?
 - Owner: stores owner information.
 - Pet: stores pet information.

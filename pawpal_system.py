@@ -3,51 +3,77 @@ from dataclasses import dataclass, field
 
 @dataclass
 class Task:
-    name: str
+    description: str
+    time: str
     duration: int
     priority: str
+    frequency: str = "daily"
+    completed: bool = False
 
-    def update_task(self, name=None, duration=None, priority=None):
-        pass
+    def mark_complete(self):
+    """Mark the task as completed."""
+    self.completed = True
 
-    def get_priority(self):
-        pass
+    def mark_incomplete(self):
+        self.completed = False
 
 
 @dataclass
 class Pet:
     name: str
     species: str
-    age: int
     tasks: list = field(default_factory=list)
 
     def add_task(self, task):
-        pass
+        self.tasks.append(task)
 
-    def remove_task(self, task_name):
-        pass
+    def get_tasks(self):
+        return self.tasks
 
 
 @dataclass
 class Owner:
     name: str
-    available_minutes: int
-    pet: Pet = None
+    pets: list = field(default_factory=list)
 
     def add_pet(self, pet):
-        pass
+        self.pets.append(pet)
 
-    def set_available_time(self, minutes):
-        pass
+    def get_all_tasks(self):
+        all_tasks = []
+        for pet in self.pets:
+            for task in pet.get_tasks():
+                all_tasks.append((pet.name, task))
+        return all_tasks
 
 
 class Scheduler:
-    def __init__(self, tasks, available_minutes):
-        self.tasks = tasks
-        self.available_minutes = available_minutes
+    def __init__(self, owner):
+        self.owner = owner
 
-    def sort_tasks(self):
-        pass
+    def generate_schedule(self):
+        tasks = self.owner.get_all_tasks()
 
-    def generate_plan(self):
-        pass
+        priority_order = {
+            "high": 1,
+            "medium": 2,
+            "low": 3
+        }
+
+        tasks.sort(key=lambda item: priority_order.get(item[1].priority.lower(), 4))
+        return tasks
+
+    def print_schedule(self):
+        schedule = self.generate_schedule()
+
+        print("Today's Schedule")
+        print("----------------")
+
+        for pet_name, task in schedule:
+            status = "Done" if task.completed else "Not done"
+            print(f"{task.time} - {pet_name}: {task.description}")
+            print(f"  Duration: {task.duration} minutes")
+            print(f"  Priority: {task.priority}")
+            print(f"  Frequency: {task.frequency}")
+            print(f"  Status: {status}")
+            print()
