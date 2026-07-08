@@ -42,66 +42,47 @@ pip install -r requirements.txt
 6. Connect your logic to the Streamlit UI in `app.py`.
 7. Refine UML so it matches what you actually built.
 
-## 🖥️ Sample Output
+classDiagram
+    class Owner {
+        +string name
+        +list pets
+        +add_pet(pet)
+        +get_all_tasks()
+    }
 
-Paste a sample of your app's CLI or Streamlit output here so a reader can see what a generated plan looks like:
+    class Pet {
+        +string name
+        +string species
+        +list tasks
+        +add_task(task)
+        +get_tasks()
+    }
 
-```
-## Sample Output
+    class Task {
+        +string description
+        +string time
+        +int duration
+        +string priority
+        +string frequency
+        +bool completed
+        +date due_date
+        +mark_complete()
+        +mark_incomplete()
+        +create_next_occurrence()
+    }
 
-```txt
-Today's Schedule
-----------------
-8:00 AM - Biscuit: Morning walk
-  Duration: 30 minutes
-  Priority: high
-  Frequency: daily
-  Status: Not done
+    class Scheduler {
+        +Owner owner
+        +time_to_minutes(time_string)
+        +sort_by_time()
+        +filter_by_pet(pet_name)
+        +filter_by_status(completed)
+        +detect_conflicts()
+        +mark_task_complete(pet_name, task_description)
+        +generate_schedule()
+        +print_schedule()
+    }
 
-9:00 AM - Biscuit: Feed breakfast
-  Duration: 10 minutes
-  Priority: high
-  Frequency: daily
-  Status: Not done
-
-10:00 AM - Mochi: Clean litter box
-  Duration: 15 minutes
-  Priority: medium
-  Frequency: daily
-  Status: Not done
-
-6:00 PM - Mochi: Play time
-  Duration: 20 minutes
-  Priority: low
-  Frequency: daily
-  Status: Not done
-```
-
-## 🧪 Testing PawPal+
-
-To run the tests:
-
-```bash
-python -m pytest
-
-## 📐 Smarter Scheduling
-
-> Fill in once you've implemented scheduling logic.
-| Feature | Method(s) | Notes |
-|---------|-----------|-------|
-| Task sorting | `Scheduler.sort_by_time()` | Sorts tasks by their scheduled time. |
-| Filtering | `Scheduler.filter_by_pet()`, `Scheduler.filter_by_status()` | Filters tasks by pet name or completion status. |
-| Conflict handling | `Scheduler.detect_conflicts()` | Checks if two tasks are scheduled at the same exact time. |
-| Recurring tasks | `Task.create_next_occurrence()`, `Scheduler.mark_task_complete()` | Creates a new daily or weekly task after one is marked complete. |
-
-## 📸 Demo Walkthrough
-
-Describe your app in numbered steps so a reader can follow along without watching a video:
-
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
-
-**Screenshot or video** *(optional)*: <!-- Insert a screenshot or link to a demo video here -->
+    Owner "1" --> "*" Pet
+    Pet "1" --> "*" Task
+    Scheduler --> Owner
